@@ -1,0 +1,22 @@
+name: 自动任务
+
+on:
+  schedule:
+    - cron: "30 02 * * *"
+  workflow_dispatch:
+
+env:
+  TZ: "Asia/Shanghai"
+  USERNAME: ${{ secrets.USERNAME }}
+  PASSWORD: ${{ secrets.PASSWORD }}
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+      - name: 执行脚本
+        run: node index.js
